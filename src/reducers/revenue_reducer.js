@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import { ADD_REVENUE } from '../actions/revenue_actions';
 
-let initialData = [['Year', 'Revenue'], [2000, 0]];
+let initialData = [['Year', 'Revenue']];
 
 const revenueReducer = (state = initialData, action) => {
 	Object.freeze(state);

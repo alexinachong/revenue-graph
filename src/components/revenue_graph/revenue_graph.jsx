@@ -7,15 +7,17 @@ class RevenueGraph extends React.Component {
 		super(props);
 		this.state = {
 			options: {
-				title: 'Year vs. Revenue',
 				hAxis: { title: 'Year', minValue: 2000, maxValue: 2020 },
 				vAxis: { title: 'Revenue', minValue: 0, maxValue: 1000 },
 				legend: 'none',
-				backgroundColor: 'transparent'
+				pointSize: 5,
+				backgroundColor: '#f3f3f3'
 			},
 			// data: [['Year', 'Revenue'], [2004, 400]]
 			data: [['Year', 'Revenue']]
 		};
+
+		this.sortData = this.sortData.bind(this);
 	}
 
 	componentDidMount() {
@@ -28,18 +30,29 @@ class RevenueGraph extends React.Component {
 		});
 	}
 
+	sortData(points) {
+		let noHeader = points.slice(1);
+		let sorted = noHeader.sort();
+		return points.slice(0, 1).concat(sorted);
+	}
+
 	render() {
-		return (
-			<Chart
-				chartType="LineChart"
-				data={this.state.data}
-				options={this.state.options}
-				graph_id="LineChart"
-				width="100%"
-				height="400px"
-				legend_toggle
-			/>
-		);
+		if (this.props.revenue.length == 1) {
+			return <h2>Please enter a datapoint above.</h2>;
+		} else {
+			return (
+				<Chart
+					className="chart"
+					chartType="LineChart"
+					data={this.sortData(this.state.data)}
+					options={this.state.options}
+					graph_id="LineChart"
+					width="80%"
+					height="400px"
+					legend_toggle
+				/>
+			);
+		}
 	}
 }
 

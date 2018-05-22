@@ -14,6 +14,7 @@ class App extends Component {
 			<div className="container">
 				<h1>Year vs. Revenue</h1>
 				<RevenueFormContainer />
+				<br />
 				<RevenueGraphContainer />
 			</div>
 		);
